@@ -24,13 +24,17 @@ namespace CatWorx.BadgeMaker {
         public string GetPhotoUrl() {
             return PhotoUrl;
         }
+
+        public string GetCompanyName() {
+            return "Cat Worx";
+        }
     }
     class Program {
-        static void Main(string[] args) {
+        async static Task Main(string[] args) {
             List<Employee> employees = GetEmployees();
             Util.PrintEmployees(employees);
             Util.MakeCSV(employees);
-            Util.MakeBadges(employees);
+            await Util.MakeBadges(employees);
 
 
             static List<Employee> GetEmployees() {
