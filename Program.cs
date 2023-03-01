@@ -31,7 +31,17 @@ namespace CatWorx.BadgeMaker {
     }
     class Program {
         async static Task Main(string[] args) {
-            List<Employee> employees = GetEmployees();
+            Console.Write("Populate with random users?(Y/n)");
+            string response = Console.ReadLine() ?? "";
+            response = response.ToLower();
+            List<Employee> employees;
+            if (response == "y" || response == "ye" || response == "yes") {
+                employees = await PeopleFetcher.GetFromApi();
+                
+            } else {
+                employees = GetEmployees();
+            }
+            
             Util.PrintEmployees(employees);
             Util.MakeCSV(employees);
             await Util.MakeBadges(employees);
