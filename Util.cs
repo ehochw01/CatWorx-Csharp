@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using SkiaSharp;
 
 namespace CatWorx.BadgeMaker {
     class Util {
@@ -27,5 +28,17 @@ namespace CatWorx.BadgeMaker {
                 }
             }
         }
+        // will use async/await syntax because the method we use from the HttpClient object is asynchronous 
+        // Task is the required return type for an async method that returns no value
+        public static void MakeBadges(List<Employee> employees) {
+        // Import the badge template image file that will work as the background image.
+        SKImage newImage = SKImage.FromEncodedData(File.OpenRead("badge.png"));
+        SKData data = newImage.Encode();
+        data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
+        // Customize each employee's badge by adding information specific to each employee—namely, the employee's name, picture, and id number.
+        // Add this new image file to the data folder.
+        }
+
+
     }
 }
